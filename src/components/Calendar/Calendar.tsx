@@ -154,6 +154,12 @@ function Calendar({
 								onClick={() => handleClick(day)}
 								className={classNames(
 									// isEqual(day, selectday) && "text-white",
+									green(day) &&
+										"bg-green-500 text-white shadow-sm hover:bg-green-700",
+									yellow(day) &&
+										"bg-yellow-500 text-white shadow-sm hover:bg-yellow-700",
+									grey(day) &&
+										"bg-white text-black shadow-sm border hover:bg-grey-400",
 									!isEqual(day, selectday) &&
 										!isToday(day) &&
 										isSameMonth(day, firstDayCurrentMonth) &&
@@ -167,12 +173,7 @@ function Calendar({
 										"text-white bg-gray-900",
 									!isEqual(day, selectday) && "hover:bg-gray-200",
 									(isEqual(day, selectday) || isToday(day)) && "font-semibold",
-									green(day) &&
-										"bg-green-500 text-white shadow-sm hover:bg-green-700",
-									yellow(day) &&
-										"bg-yellow-500 text-white shadow-sm hover:bg-yellow-700",
-									grey(day) &&
-										"bg-white text-black shadow-sm border hover:bg-grey-400",
+
 									"mx-auto flex h-8 w-8 items-center justify-center rounded-full"
 								)}
 							>
