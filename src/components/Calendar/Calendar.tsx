@@ -6,7 +6,6 @@ import {
 	format,
 	getDay,
 	isEqual,
-	isSameMonth,
 	isToday,
 	parse,
 } from "date-fns";
@@ -66,7 +65,6 @@ function Calendar({
 			}
 			return isEqual(new Date(year, month, parseInt(item)), day);
 		});
-		// return false;
 	}
 	function yellow(day: Date) {
 		return data.yellow.find((item) => {
@@ -103,9 +101,6 @@ function Calendar({
 		let firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
 		setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
 	}
-	// useEffect(() => {
-	// 	setTimeDate(selectday);
-	// }, [selectday, setTimeDate]);
 
 	return (
 		<div className="md:pr-14">
@@ -153,18 +148,17 @@ function Calendar({
 								type="button"
 								onClick={() => handleClick(day)}
 								className={classNames(
-									// isEqual(day, selectday) && "text-white",
-									green(day) &&
-										"bg-green-500 text-white shadow-sm hover:bg-green-700",
-									yellow(day) &&
-										"bg-yellow-500 text-white shadow-sm hover:bg-yellow-700",
-									grey(day) &&
-										"bg-white text-black shadow-sm border hover:bg-grey-400",
-									!isEqual(day, selectday) &&
-										!isToday(day) &&
-										isSameMonth(day, firstDayCurrentMonth) &&
-										"text-gray-400",
-									getDay(day) === 0 && "text-red-500",
+									isEqual(day, selectday) && "text-white",
+									green(day)
+										? "bg-green-500 text-white shadow-sm hover:bg-green-700"
+										: yellow(day)
+										? "bg-yellow-500 text-white shadow-sm hover:bg-yellow-700"
+										: grey(day)
+										? "bg-white text-black shadow-sm border hover:bg-grey-400"
+										: getDay(day) === 0
+										? "text-red-500"
+										: "text-gray-400",
+
 									isEqual(day, selectday) &&
 										isToday(day) &&
 										"text-red-400 bg-black",
