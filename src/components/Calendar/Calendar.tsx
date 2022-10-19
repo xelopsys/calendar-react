@@ -120,10 +120,12 @@ function Calendar({
 										: yellow(day)
 										? "bg-yellow-500 text-white shadow-sm hover:bg-yellow-700"
 										: grey(day)
-										? "bg-white text-black shadow-sm border hover:bg-grey-400"
+										? `bg-white ${
+												isEqual(day, selectday) ? "text-white" : "text-black "
+										  }shadow-sm border hover:bg-grey-400`
 										: getDay(day) === 0
 										? "text-red-500"
-										: "text-gray-400",
+										: "text-gray-900",
 
 									isEqual(day, selectday) &&
 										isToday(day) &&

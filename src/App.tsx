@@ -32,7 +32,7 @@ function App() {
 							timeDate={timeDate}
 							green={green}
 							yellow={yellow}
-							grey={yellow}
+							grey={grey}
 							handleClose={handleClose}
 						/>
 					)}
