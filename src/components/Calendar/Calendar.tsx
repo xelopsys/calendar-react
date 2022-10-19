@@ -23,6 +23,14 @@ function classNames<T>(...classes: T[]) {
 	return classes.filter(Boolean).join(" ");
 }
 
+const getData = (date: string) => {
+	const dateArray = date.split(".");
+	const year = parseInt(dateArray[1]);
+	const month = parseInt(dateArray[0]) - 1;
+	const startDate = new Date(year, month);
+	return { year, month, startDate };
+};
+
 interface CalendarProps {
 	data: Data;
 	setTimeDate: React.Dispatch<React.SetStateAction<Date>>;
@@ -40,13 +48,6 @@ function Calendar({
 	setGrey,
 	setShowModal,
 }: CalendarProps) {
-	const getData = (date: string) => {
-		const dateArray = date.split(".");
-		const year = parseInt(dateArray[1]);
-		const month = parseInt(dateArray[0]) - 1;
-		const startDate = new Date(year, month);
-		return { year, month, startDate };
-	};
 	const { year, month, startDate } = getData(data.date);
 	const [selectday, setSelectday] = useState<Date>(startDate);
 	const [currentMonth, setCurrentMonth] = useState(
@@ -90,7 +91,6 @@ function Calendar({
 		setGrey(grey(day) ? true : false);
 		setShowModal(true);
 	};
-	console.log("day", getDay(days[2]));
 
 	function previousMonth() {
 		let firstDayNextMonth = add(firstDayCurrentMonth, { months: -1 });
