@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
 import Calendar from "./components/Calendar/Calendar";
-import { data } from "./data/data";
 import Modal from "./components/Modal/Modal";
 function App() {
 	const [timeDate, setTimeDate] = useState<Date>(new Date("2022-07-01"));
@@ -22,7 +21,6 @@ function App() {
 			>
 				<div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
 					<Calendar
-						data={data}
 						setTimeDate={setTimeDate}
 						setGreen={setGreen}
 						setYellow={setYellow}

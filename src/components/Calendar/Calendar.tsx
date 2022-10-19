@@ -9,7 +9,7 @@ import {
 	isToday,
 	parse,
 } from "date-fns";
-import { Data } from "../../data/data";
+import { startDate, green, yellow, grey } from "../utils";
 let colStartClasses = [
 	"col-start-7",
 	"",
@@ -23,16 +23,7 @@ function classNames<T>(...classes: T[]) {
 	return classes.filter(Boolean).join(" ");
 }
 
-const getData = (date: string) => {
-	const dateArray = date.split(".");
-	const year = parseInt(dateArray[1]);
-	const month = parseInt(dateArray[0]) - 1;
-	const startDate = new Date(year, month);
-	return { year, month, startDate };
-};
-
 interface CalendarProps {
-	data: Data;
 	setTimeDate: React.Dispatch<React.SetStateAction<Date>>;
 	setYellow: React.Dispatch<React.SetStateAction<boolean>>;
 	setGreen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -41,14 +32,12 @@ interface CalendarProps {
 }
 
 function Calendar({
-	data,
 	setTimeDate,
 	setYellow,
 	setGreen,
 	setGrey,
 	setShowModal,
 }: CalendarProps) {
-	const { year, month, startDate } = getData(data.date);
 	const [selectday, setSelectday] = useState<Date>(startDate);
 	const [currentMonth, setCurrentMonth] = useState(
 		format(startDate, "MMM-yyyy")
@@ -59,30 +48,7 @@ function Calendar({
 		start: firstDayCurrentMonth,
 		end: endOfMonth(firstDayCurrentMonth),
 	});
-	function green(day: Date) {
-		return data.green.find((item) => {
-			if (item.startsWith("0")) {
-				return isEqual(new Date(year, month, parseInt(item.split("")[1])), day);
-			}
-			return isEqual(new Date(year, month, parseInt(item)), day);
-		});
-	}
-	function yellow(day: Date) {
-		return data.yellow.find((item) => {
-			if (item.startsWith("0")) {
-				return isEqual(new Date(year, month, parseInt(item.split("")[1])), day);
-			}
-			return isEqual(new Date(year, month, parseInt(item)), day);
-		});
-	}
-	function grey(day: Date) {
-		return data.grey.find((item) => {
-			if (item.startsWith("0")) {
-				return isEqual(new Date(year, month, parseInt(item.split("")[1])), day);
-			}
-			return isEqual(new Date(year, month, parseInt(item)), day);
-		});
-	}
+
 	const handleClick = (day: Date) => {
 		setSelectday(day);
 		setTimeDate(day);
