@@ -10,7 +10,10 @@ interface ModalProps {
 
 function Modal({ timeDate, green, yellow, grey, handleClose }: ModalProps) {
 	return (
-		<div className="absolute p-4 w-full h-full  top-0 left-0 pt-36 z-10 flex justify-center items-start backdrop-filter backdrop-blur-sm">
+		<div
+			className="absolute p-4 w-full h-full  top-0 left-0 pt-36 z-10 flex justify-center items-start backdrop-filter backdrop-blur-sm"
+			onClick={handleClose}
+		>
 			<div className=" rounded-lg w-72 h-auto shadow box-border relative top-0">
 				<button
 					type="button"
